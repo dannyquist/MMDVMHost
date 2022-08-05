@@ -5,6 +5,7 @@ CXX     = c++
 CFLAGS  = -g -O3 -Wall -std=c++0x -pthread -DHAVE_LOG_H -I/usr/local/include
 LIBS    = -lpthread -lutil
 LDFLAGS = -g -L/usr/local/lib
+INSTALL_DIR = /usr/local/bin/
 
 OBJECTS = \
 		AMBEFEC.o BCH.o AX25Control.o AX25Network.o BPTC19696.o CASTInfo.o Conf.o CRC.o Display.o DMRControl.o DMRCSBK.o DMRData.o DMRDataHeader.o \
@@ -30,8 +31,8 @@ RemoteCommand:	Log.o RemoteCommand.o UDPSocket.o
 
 .PHONY install:
 install: all
-		install -m 755 MMDVMHost /usr/local/bin/
-		install -m 755 RemoteCommand /usr/local/bin/
+		install -m 755 MMDVMHost $(INSTALL_DIR)
+		install -m 755 RemoteCommand $(INSTALL_DIR)
 
 .PHONY install-service:
 install-service: install /etc/MMDVM.ini
