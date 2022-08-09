@@ -233,16 +233,16 @@ int CMMDVMHost::run()
 #if !defined(HD44780) && !defined(OLED) && !defined(_OPENWRT)
 		// If we are currently root...
 		if (getuid() == 0) {
-			struct passwd* user = ::getpwnam("mmdvm");
+			struct passwd* user = ::getpwnam("node");
 			if (user == NULL) {
-				::fprintf(stderr, "Could not get the mmdvm user, exiting\n");
+				::fprintf(stderr, "Could not get the node user, exiting\n");
 				return -1;
 			}
 
 			uid_t mmdvm_uid = user->pw_uid;
 			gid_t mmdvm_gid = user->pw_gid;
 
-			// Set user and group ID's to mmdvm:mmdvm
+			// Set user and group ID's to node:node
 			if (::setgid(mmdvm_gid) != 0) {
 				::fprintf(stderr, "Could not set mmdvm GID, exiting\n");
 				return -1;
